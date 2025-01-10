@@ -1,0 +1,136 @@
+included:
+ - ../Bakery
+
+#--------------#
+
+opt_in_rules:
+ - all
+ 
+disabled_rules:
+ - unused_parameter
+ - extension_access_modifier
+ - todo
+ - unavailable_function
+ - prefer_key_path
+ - contrasted_opening_brace
+ - explicit_acl
+ - pattern_matching_keywords
+ - accessibility_trait_for_button
+ - explicit_enum_raw_value
+ - explicit_top_level_acl
+ - explicit_type_interface
+ - vertical_whitespace_between_cases
+ - vertical_whitespace_opening_braces
+ - no_extension_access_modifier
+ - type_body_length
+ - shorthand_operator
+ - enum_case_associated_values_count
+ - file_length
+ - cyclomatic_complexity
+ - line_length
+ - indentation_width
+ - required_deinit
+ - prohibited_interface_builder
+ - no_grouping_extension
+ - no_magic_numbers
+ - legacy_objc_type
+ - discouraged_optional_collection
+ - sorted_enum_cases
+ - switch_case_on_newline
+ - type_contents_order
+ - file_name
+ - superfluous_disable_command
+ - discouraged_optional_boolean
+ - superfluous_else
+ - file_types_order
+ - sorted_imports
+ - anonymous_argument_in_multiline_closure
+ - direct_return
+ - strict_fileprivate
+ - prefer_self_in_static_references
+ - lower_acl_than_parent
+ - number_separator
+ - missing_docs
+ - sorted_first_last
+ - control_statement
+ - for_where
+ - leading_whitespace
+ - accessibility_label_for_image
+ 
+# Need to enable
+ - function_default_parameter_at_end
+ - function_body_length
+ - closure_body_length
+ - contains_over_filter_is_empty
+ - contains_over_range_nil_comparison
+ - first_where
+ - discouraged_none_name
+ - contains_over_first_not_nil
+ - empty_string
+ - unhandled_throwing_task
+ - empty_count
+ 
+# Deprecated rules
+
+ - inert_defer
+ - unused_capture_list
+ 
+#--------------#
+
+attributes:
+ always_on_line_above: ["@objc", "@State", "@FocusState", "@Environment", "@ViewBuilder", "@Binding", "@ToolbarContentBuilder", "@ObservationIgnored"]
+
+conditional_returns_on_newline:
+ if_only: true
+
+deployment_target:
+ iOS_deployment_target: 15.0
+ 
+discouraged_object_literal:
+ image_literal: false
+
+force_unwrapping:
+ severity: error
+
+function_parameter_count:
+ warning: 7
+
+identifier_name:
+ excluded:
+  - id
+  - in
+  - or
+  - of
+  - x
+  - y
+  - dx
+  - dy
+  - as
+  - on
+  - to
+  - up
+  - _body
+  - ok
+
+implicitly_unwrapped_optional:
+ severity: error
+
+large_tuple:
+ warning: 6
+
+nesting:
+ type_level:
+  warning: 3
+
+trailing_closure:
+ only_single_muted_parameter: true
+
+trailing_comma:
+ mandatory_comma: true
+
+trailing_whitespace:
+ ignores_empty_lines: true
+ ignores_comments: false
+
+type_name:
+ max_length: 50
