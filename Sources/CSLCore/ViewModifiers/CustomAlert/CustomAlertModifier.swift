@@ -19,7 +19,7 @@ import SwiftUI
 /// )
 ///
 /// YourView()
-///     .modifier(CustomAlertModifier(data: $alertConfiguration))
+///     .modifier(CustomAlertModifier(configuration: $alertConfiguration))
 /// ```
 ///
 /// Alternatively, use the `.customAlert` view extension for improved readability.
@@ -29,15 +29,15 @@ public struct CustomAlertModifier: ViewModifier {
     
     /// A binding to the alert configuration that determines the content and visibility of the alert.
     @Binding
-    private var data: CSLAlertConfiguration?
+    private var configuration: CSLAlertConfiguration?
     
     // MARK: - Initialization
     
     /// Initializes the modifier with a binding to the alert configuration.
     ///
-    /// - Parameter data: A binding to `CSLAlertConfiguration` that provides the alert's title, message, and buttons.
-    public init(data: Binding<CSLAlertConfiguration?>) {
-        self._data = data
+    /// - Parameter configuration: A binding to `CSLAlertConfiguration` that provides the alert's title, message, and buttons.
+    public init(configuration: Binding<CSLAlertConfiguration?>) {
+        self._configuration = configuration
     }
     
     // MARK: - Body
@@ -49,22 +49,22 @@ public struct CustomAlertModifier: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .alert(
-                data?.title ?? "",
+                configuration?.title ?? "",
                 isPresented: Binding<Bool>(
-                    get: { data != nil },
-                    set: { value in data = value ? data : nil }
+                    get: { configuration != nil },
+                    set: { value in configuration = value ? configuration : nil }
                 ),
-                presenting: data
-            ) { data in
-                ForEach(data.buttons) { button in
+                presenting: configuration
+            ) { configuration in
+                ForEach(configuration.buttons) { button in
                     Button(
                         role: button.role,
                         action: button.action ?? { }, // swiftlint:disable:this no_empty_block
                         label: { Text(button.title) }
                     )
                 }
-            } message: { data in
-                if let message = data.message {
+            } message: { configuration in
+                if let message = configuration.message {
                     Text(message)
                 }
             }
@@ -91,12 +91,12 @@ extension View {
 /// )
 ///
 /// YourView()
-///     .customAlert(data: $alertConfiguration)
+///     .customAlert(configuration: $alertConfiguration)
 /// ```
     ///
-    /// - Parameter data: A binding to `CSLAlertConfiguration` defining the alert's title, message, and buttons.
+    /// - Parameter configuration: A binding to `CSLAlertConfiguration` defining the alert's title, message, and buttons.
     /// - Returns: A view that displays the alert when the binding is non-`nil`.
-    public func customAlert(data: Binding<CSLAlertConfiguration?>) -> some View {
-        modifier(CustomAlertModifier(data: data))
+    public func customAlert(configuration: Binding<CSLAlertConfiguration?>) -> some View {
+        modifier(CustomAlertModifier(configuration: configuration))
     }
 }
