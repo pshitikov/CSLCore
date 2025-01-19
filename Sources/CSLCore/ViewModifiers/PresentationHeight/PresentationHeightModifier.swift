@@ -28,9 +28,7 @@ public struct PresentationHeightModifier: ViewModifier {
     /// Initializes the modifier with a binding to the height value.
     ///
     /// - Parameter height: A binding to the height value that will be updated by the modifier.
-    public init(height: Binding<CGFloat>) {
-        self._height = height
-    }
+    public init(height: Binding<CGFloat>) { self._height = height }
     
     // MARK: - Body
     
