@@ -44,10 +44,10 @@ public struct CSLAppThemeSheet: View {
     private let systemImage: Image
     
     /// The currently selected theme.
-    private let currentAppTheme: AppTheme
+    private let currentAppTheme: CSLAppTheme
     
     /// Closure called when a theme is selected.
-    private let didSelectAppTheme: ((AppTheme) -> Void)?
+    private let didSelectAppTheme: ((CSLAppTheme) -> Void)?
     
     /// Initializes the `CoreAppThemeScreen` view.
     /// - Parameters:
@@ -60,8 +60,8 @@ public struct CSLAppThemeSheet: View {
         lightImage: Image,
         darkImage: Image,
         systemImage: Image,
-        currentAppTheme: AppTheme,
-        didSelectAppTheme: ((AppTheme) -> Void)?
+        currentAppTheme: CSLAppTheme,
+        didSelectAppTheme: ((CSLAppTheme) -> Void)?
     ) {
         self.lightImage = lightImage
         self.darkImage = darkImage
@@ -116,10 +116,10 @@ extension CSLAppThemeSheet {
     private var appThemeView: some View {
         Grid {
             GridRow {
-                ForEach(AppTheme.allCases.indices, id: \.self) { index in
-                    themeView(for: AppTheme.allCases[index])
+                ForEach(CSLAppTheme.allCases.indices, id: \.self) { index in
+                    themeView(for: CSLAppTheme.allCases[index])
                     
-                    if index < AppTheme.allCases.count - 1 { Spacer() }
+                    if index < CSLAppTheme.allCases.count - 1 { Spacer() }
                 }
             }
         }
@@ -129,7 +129,7 @@ extension CSLAppThemeSheet {
     /// A view for an individual theme option.
     /// - Parameter theme: The theme to display.
     @ViewBuilder
-    private func themeView(for theme: AppTheme) -> some View {
+    private func themeView(for theme: CSLAppTheme) -> some View {
         VStack(spacing: CSLConstants.verticalPadding) {
             Text(theme.title)
                 .font(.callout)

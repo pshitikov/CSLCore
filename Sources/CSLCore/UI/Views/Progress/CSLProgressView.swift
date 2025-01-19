@@ -37,6 +37,4 @@ public struct CSLProgressView: View {
 
 // MARK: - Previews
 
-#Preview {
-    CSLProgressView()
-}
+#Preview { CSLProgressView() }

@@ -2,7 +2,7 @@ import Foundation
 
 /// Represents HTTP response statuses with associated codes and reason phrases.
 /// Conforms to `Sendable` for use in concurrent contexts.
-public enum HTTPResponseStatus: Sendable {
+public enum CSLHTTPResponseStatus: Sendable {
     
     // MARK: - Cases
     
@@ -36,7 +36,7 @@ public enum HTTPResponseStatus: Sendable {
     
     // MARK: - Initialization
     
-    /// Initializes an `HTTPResponseStatus` from a status code and optional reason phrase.
+    /// Initializes an `CSLHTTPResponseStatus` from a status code and optional reason phrase.
     /// - Parameters:
     ///   - statusCode: The numerical HTTP status code.
     ///   - reasonPhrase: The accompanying reason phrase.
@@ -109,7 +109,7 @@ public enum HTTPResponseStatus: Sendable {
 
 // MARK: - Properties
 
-public extension HTTPResponseStatus {
+public extension CSLHTTPResponseStatus {
     
     /// The numerical status code associated with the HTTP response status.
     var code: UInt {

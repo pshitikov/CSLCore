@@ -1,46 +1,51 @@
 import SwiftUI
 
-/// A custom `ViewModifier` that displays a customizable alert using provided alert data.
+/// A custom `ViewModifier` for presenting a configurable alert with a title, message, and action buttons.
 ///
-/// The ``CustomAlertModifier`` is used to present an alert with a title, message, and customizable buttons.
-/// It works with a binding to `AlertData` that specifies the alert's content and manages its visibility.
+/// Use `CustomAlertModifier` to display an alert using a binding to `CSLAlertConfiguration`,
+/// which defines the alert's content and visibility. This modifier makes it simple to manage and customize
+/// alerts in SwiftUI.
 ///
-/// - Note: The alert automatically dismisses when the binding is set to `nil`.
+/// - Note: The alert is automatically dismissed when the binding is set to `nil`.
 ///
-/// Usage:
+/// ### Example Usage
 /// ```swift
-/// @State private var alertData: AlertData? = AlertData(
+/// @State private var alertConfiguration: CSLAlertConfiguration? = CSLAlertConfiguration(
 ///     title: "Alert Title",
 ///     message: "This is the alert message.",
-///     buttons: [AlertButton(title: "OK", action: { print("OK tapped") })]
+///     buttons: [
+///         CSLAlertButton(title: "OK", action: { print("OK tapped") })
+///     ]
 /// )
 ///
 /// YourView()
-///     .modifier(CustomAlertModifier(data: $alertData))
+///     .modifier(CustomAlertModifier(data: $alertConfiguration))
 /// ```
 ///
-/// Alternatively, use the `customAlert` convenience method on any `View`.
+/// Alternatively, use the `.customAlert` view extension for improved readability.
 public struct CustomAlertModifier: ViewModifier {
     
     // MARK: - Properties
     
-    /// A binding to the alert data that controls the alert's content and visibility.
+    /// A binding to the alert configuration that determines the content and visibility of the alert.
     @Binding
-    private var data: AlertData?
+    private var data: CSLAlertConfiguration?
     
     // MARK: - Initialization
     
-    /// Creates a new instance of `CustomAlertModifier`.
+    /// Initializes the modifier with a binding to the alert configuration.
     ///
-    /// - Parameter data: A binding to optional `AlertData` that determines the alert's title, message, and buttons.
-    public init(data: Binding<AlertData?>) { self._data = data }
+    /// - Parameter data: A binding to `CSLAlertConfiguration` that provides the alert's title, message, and buttons.
+    public init(data: Binding<CSLAlertConfiguration?>) {
+        self._data = data
+    }
     
     // MARK: - Body
     
-    /// The body of the modifier that applies the alert to the content.
+    /// Composes the content view with an alert overlay based on the provided configuration.
     ///
-    /// - Parameter content: The content view to which the alert is applied.
-    /// - Returns: A view with an alert overlay.
+    /// - Parameter content: The base content view to which the alert is applied.
+    /// - Returns: A modified view that presents an alert when the binding is non-`nil`.
     public func body(content: Content) -> some View {
         content
             .alert(
@@ -59,7 +64,9 @@ public struct CustomAlertModifier: ViewModifier {
                     )
                 }
             } message: { data in
-                if let message = data.message { Text(message) }
+                if let message = data.message {
+                    Text(message)
+                }
             }
     }
 }
@@ -68,23 +75,28 @@ public struct CustomAlertModifier: ViewModifier {
 
 extension View {
     
-    /// Adds a customizable alert to the view using the provided alert data binding.
+    /// Adds a configurable alert to the view using a binding to `CSLAlertConfiguration`.
     ///
-    /// The `customAlert` method is a convenience method to apply the ``CustomAlertModifier``.
+    /// This extension provides a convenience method for applying the `CustomAlertModifier`,
+    /// improving code readability and simplifying usage.
     ///
-    /// Usage:
+    /// ### Example Usage
     /// ```swift
-    /// @State private var alertData: AlertData? = AlertData(
+    /// @State private var alertConfiguration: CSLAlertConfiguration? = CSLAlertConfiguration(
     ///     title: "Alert Title",
     ///     message: "This is the alert message.",
-    ///     buttons: [AlertButton(title: "OK", action: { print("OK tapped") })]
-    /// )
+    ///     buttons: [
+///         CSLAlertButton(title: "OK", action: { print("OK tapped") })
+///     ]
+/// )
+///
+/// YourView()
+///     .customAlert(data: $alertConfiguration)
+/// ```
     ///
-    /// YourView()
-    ///     .customAlert(data: $alertData)
-    /// ```
-    ///
-    /// - Parameter data: A binding to optional `AlertData` that determines the alert's title, message, and buttons.
-    /// - Returns: A view with an alert overlay.
-    public func customAlert(data: Binding<AlertData?>) -> some View { modifier(CustomAlertModifier(data: data)) }
+    /// - Parameter data: A binding to `CSLAlertConfiguration` defining the alert's title, message, and buttons.
+    /// - Returns: A view that displays the alert when the binding is non-`nil`.
+    public func customAlert(data: Binding<CSLAlertConfiguration?>) -> some View {
+        modifier(CustomAlertModifier(data: data))
+    }
 }

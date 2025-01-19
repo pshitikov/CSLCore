@@ -2,9 +2,9 @@ import SwiftUI
 
 /// Represents the application's theme settings.
 ///
-/// The `AppTheme` enum defines three possible theme options: `light`, `dark`, and `system`.
+/// The `CSLAppTheme` enum defines three possible theme options: `light`, `dark`, and `system`.
 /// It provides properties for localized titles, user interface styles, and corresponding color schemes, making it easy to integrate theme customization in a SwiftUI application.
-public enum AppTheme: String, CaseIterable, Hashable {
+public enum CSLAppTheme: String, CaseIterable, Hashable {
     
     // MARK: - Cases
     
