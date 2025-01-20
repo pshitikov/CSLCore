@@ -159,10 +159,4 @@ extension Color {
     /// A system indigo color used for accent elements.
     /// Corresponds to `UIColor.systemIndigo` and adapts to light and dark mode.
     public static let systemIndigo = Color(UIColor.systemIndigo)
-    
-    // MARK: - Custom Colors
-    
-    /// A custom color defined in the app's asset catalog for search bar elements.
-    /// Corresponds to a color named "SystemSearchBar" in the asset catalog.
-    public static let systemSearchBar = Color("SystemSearchBar")
 }

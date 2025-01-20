@@ -40,7 +40,7 @@ public struct CSLProfileImageView: View {
                 Image(systemName: SFSymbol.personCropCircleFill.rawValue)
                     .resizable()
                     .symbolRenderingMode(.palette)
-                    .foregroundStyle(Color.secondaryLabel, Color.systemSearchBar)
+                    .foregroundStyle(Color.secondaryLabel, Color.secondarySystemBackground)
             }
         }
         .clipShape(.circle)

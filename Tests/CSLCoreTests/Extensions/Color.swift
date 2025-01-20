@@ -29,9 +29,6 @@ final class ColorExtensionTests: XCTestCase {
             // System Colors
             .systemBlue, .systemPurple, .systemGreen, .systemYellow, .systemOrange,
             .systemPink, .systemRed, .systemTeal, .systemIndigo,
-            
-            // Custom Colors
-            .systemSearchBar
         ]
         
         for color in colors {
