@@ -3,6 +3,22 @@ import SwiftUI
 @Observable
 public final class CSLPresenter<T: Identifiable> {
     
-    var model: T?
-    var isPresented = false
+    // MARK: - Static Properties
+    
+    public static var emptyModel: CSLPresenter<CSLAnyIdentifiable> { .init(model: .init()) }
+    
+    // MARK: - Observable
+    
+    public var model: T?
+    public var isPresented: Bool
+    
+    // MARK: - Initialization
+    
+    public init(model: T? = nil) {
+        self.model = model
+        
+        isPresented = false
+    }
+    
+    public func present() { isPresented = true }
 }
