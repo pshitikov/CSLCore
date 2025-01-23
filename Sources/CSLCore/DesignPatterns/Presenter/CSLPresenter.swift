@@ -22,5 +22,5 @@ public final class CSLPresenter<T: Identifiable> {
 
     // MARK: - Public Functions
     
-    public func present() { isPresented = true } 
+    public func present() { isPresented = true }
 }
