@@ -18,7 +18,7 @@ import SwiftUI
 /// ```
 ///
 /// Alternatively, use the `onFirstAppear` convenience method on any `View`.
-struct OnFirstAppearModifier: ViewModifier {
+public struct OnFirstAppearModifier: ViewModifier {
     
     // MARK: - Properties
     
@@ -64,7 +64,7 @@ extension View {
     ///
     /// - Parameter onFirstAppearAction: A closure to execute when the view appears for the first time.
     /// - Returns: A view with the `onFirstAppear` behavior applied.
-    func onFirstAppear(_ onFirstAppearAction: @escaping () -> Void) -> some View {
+    public func onFirstAppear(_ onFirstAppearAction: @escaping () -> Void) -> some View {
         modifier(OnFirstAppearModifier(onFirstAppearAction))
     }
 }
