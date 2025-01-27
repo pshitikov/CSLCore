@@ -22,6 +22,9 @@ public struct CSLProfileButtonView: View {
     
     // MARK: - Properties
     
+    /// The optional image link to display as the profile image.
+    private var imageLink: String?
+    
     /// The optional image data to display as the profile image.
     private var imageData: Data?
     
@@ -30,7 +33,7 @@ public struct CSLProfileButtonView: View {
     
     /// A closure to be executed when the button is tapped.
     private var didSelect: (() -> Void)?
-   
+    
     // MARK: - Initialization
     
     /// Initializes a new instance of `CSLProfileButtonView`.
@@ -45,6 +48,22 @@ public struct CSLProfileButtonView: View {
         didSelect: (() -> Void)? = nil
     ) {
         self.imageData = imageData
+        self.imageSize = imageSize ?? Values.defaultImageSize
+        self.didSelect = didSelect
+    }
+    
+    /// Initializes a new instance of `CSLProfileButtonView`.
+    ///
+    /// - Parameters:
+    ///   - imageLink: Optional link to be displayed as the profile image inside the button. Defaults to `nil`.
+    ///   - imageSize: Optional size to be displayed as the profile image inside the button. Defaults to `defaultImageSize`.
+    ///   - didSelect: A closure to be executed when the button is tapped. Defaults to `nil`.
+    public init(
+        imageLink: String? = nil,
+        imageSize: CGSize? = nil,
+        didSelect: (() -> Void)? = nil
+    ) {
+        self.imageLink = imageLink
         self.imageSize = imageSize ?? Values.defaultImageSize
         self.didSelect = didSelect
     }
@@ -64,7 +83,10 @@ public struct CSLProfileButtonView: View {
     /// A view that represents the button's label, which includes the profile image (if available).
     @ViewBuilder
     private var buttonLabelView: some View {
-        CSLProfileImageView(imageData: imageData)
+        imageData != nil
+        ? CSLProfileImageView(imageData: imageData)
+            .frame(width: imageSize.width, height: imageSize.height)
+        : CSLProfileImageView(imageLink: imageLink)
             .frame(width: imageSize.width, height: imageSize.height)
     }
 }
@@ -72,5 +94,5 @@ public struct CSLProfileButtonView: View {
 // MARK: - Previews
 
 #Preview {
-    CSLProfileButtonView()
+    CSLProfileButtonView(imageData: nil)
 }

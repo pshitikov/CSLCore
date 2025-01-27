@@ -1,5 +1,6 @@
 import SwiftUI
 import SFSafeSymbols
+import SDWebImageSwiftUI
 
 /// A custom SwiftUI view that displays a profile image with a fallback to a default symbol.
 ///
@@ -12,6 +13,9 @@ import SFSafeSymbols
 public struct CSLProfileImageView: View {
     
     // MARK: - Properties
+    
+    /// The optional link for the profile image.
+    private var imageLink: String?
     
     /// The optional data for the profile image.
     private var imageData: Data?
@@ -26,6 +30,14 @@ public struct CSLProfileImageView: View {
         self.imageData = imageData
     }
     
+    /// Initializes a new instance of `CSLProfileImageView`.
+    ///
+    /// - Parameters:
+    ///   - imageLink: Optional link for the profile image. If not provided, a default system symbol will be displayed. Defaults to `nil`.
+    public init(imageLink: String? = nil) {
+        self.imageLink = imageLink
+    }
+    
     // MARK: - Body
     
     /// The body of the view that displays the profile image or fallback symbol.
@@ -36,19 +48,34 @@ public struct CSLProfileImageView: View {
                 userImage
                     .resizable()
                     .scaledToFill()
+            } else if let imageLink,
+                      let url = URL(string: imageLink) {
+                WebImage(
+                    url: url,
+                    content: { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    },
+                    placeholder: { placeholderView }
+                )
             } else {
-                Image(systemName: SFSymbol.personCropCircleFill.rawValue)
-                    .resizable()
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(Color.secondaryLabel, Color.secondarySystemBackground)
+                placeholderView
             }
         }
         .clipShape(.circle)
+    }
+    
+    private var placeholderView: some View {
+        Image(systemName: SFSymbol.personCropCircleFill.rawValue)
+            .resizable()
+            .symbolRenderingMode(.palette)
+            .foregroundStyle(Color.secondaryLabel, Color.secondarySystemBackground)
     }
 }
 
 // MARK: - Previews
 
 #Preview {
-    CSLProfileImageView()
+    CSLProfileImageView(imageData: nil)
 }
