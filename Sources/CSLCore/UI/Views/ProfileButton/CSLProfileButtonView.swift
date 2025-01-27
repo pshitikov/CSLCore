@@ -17,13 +17,16 @@ public struct CSLProfileButtonView: View {
     private enum Values {
         
         /// The size of the image displayed inside the button.
-        static let imageSize = CGSize(width: 32, height: 32)
+        static let defaultImageSize = CGSize(width: 32, height: 32)
     }
     
     // MARK: - Properties
     
     /// The optional image data to display as the profile image.
     private var imageData: Data?
+    
+    /// The optional image size to display as the profile image.
+    private var imageSize: CGSize
     
     /// A closure to be executed when the button is tapped.
     private var didSelect: (() -> Void)?
@@ -34,9 +37,15 @@ public struct CSLProfileButtonView: View {
     ///
     /// - Parameters:
     ///   - imageData: Optional data to be displayed as the profile image inside the button. Defaults to `nil`.
+    ///   - imageSize: Optional size to be displayed as the profile image inside the button. Defaults to `defaultImageSize`.
     ///   - didSelect: A closure to be executed when the button is tapped. Defaults to `nil`.
-    public init(imageData: Data? = nil, didSelect: (() -> Void)? = nil) {
+    public init(
+        imageData: Data? = nil,
+        imageSize: CGSize? = nil,
+        didSelect: (() -> Void)? = nil
+    ) {
         self.imageData = imageData
+        self.imageSize = imageSize ?? Values.defaultImageSize
         self.didSelect = didSelect
     }
     
@@ -56,7 +65,7 @@ public struct CSLProfileButtonView: View {
     @ViewBuilder
     private var buttonLabelView: some View {
         CSLProfileImageView(imageData: imageData)
-            .frame(width: Values.imageSize.width, height: Values.imageSize.height)
+            .frame(width: imageSize.width, height: imageSize.height)
     }
 }
 
