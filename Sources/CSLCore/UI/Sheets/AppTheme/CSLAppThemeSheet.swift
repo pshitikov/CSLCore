@@ -56,7 +56,7 @@ public struct CSLAppThemeSheet: View {
     ///   - systemImage: The image for the system default theme.
     ///   - currentAppTheme: The currently selected theme.
     ///   - didSelectAppTheme: A closure called when a theme is selected.
-    init(
+    public init(
         lightImage: Image,
         darkImage: Image,
         systemImage: Image,
