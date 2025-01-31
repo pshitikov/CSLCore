@@ -21,7 +21,9 @@ public struct CSLAppThemeSheet: View {
         static let screenTitle: LocalizedStringKey = "core_app_theme_screen_title"
         
         /// Max width of app theme view.
-        static let maxAppThemeViewWidth: CGFloat = 380
+        static let maxAppThemeViewWidth: CGFloat = 500
+        
+        static let imageSize: CGSize = .init(width: 100, height: 220)
     }
     
     // MARK: - Properties
@@ -44,7 +46,8 @@ public struct CSLAppThemeSheet: View {
     private let systemImage: Image
     
     /// The currently selected theme.
-    private let currentAppTheme: CSLAppTheme
+    @State
+    private var currentAppTheme: CSLAppTheme
     
     /// Closure called when a theme is selected.
     private let didSelectAppTheme: ((CSLAppTheme) -> Void)?
@@ -66,7 +69,7 @@ public struct CSLAppThemeSheet: View {
         self.lightImage = lightImage
         self.darkImage = darkImage
         self.systemImage = systemImage
-        self.currentAppTheme = currentAppTheme
+        _currentAppTheme = State(initialValue: currentAppTheme)
         self.didSelectAppTheme = didSelectAppTheme
     }
     
@@ -131,7 +134,18 @@ extension CSLAppThemeSheet {
     @ViewBuilder
     private func themeView(for theme: CSLAppTheme) -> some View {
         VStack(spacing: CSLConstants.verticalPadding) {
-            Text(theme.title)
+            Group {
+                switch theme {
+                case .light: lightImage.resizable()
+                case .dark: darkImage.resizable()
+                case .system: systemImage.resizable()
+                }
+            }
+            .aspectRatio(contentMode: .fill)
+            .frame(width: Values.imageSize.width, height: Values.imageSize.height)
+            .roundedCornerWithBorder(radius: CSLConstants.cornerRadius)
+            
+            Text(theme.title, bundle: .module)
                 .font(.callout)
             
             if currentAppTheme == theme {
@@ -147,6 +161,7 @@ extension CSLAppThemeSheet {
             }
         }
         .onTapGesture {
+            currentAppTheme = theme
             didSelectAppTheme?(theme)
         }
     }

@@ -30,4 +30,6 @@ public enum CSLConstants {
     
     /// The standard vertical spacing between UI elements.
     public static let verticalSpacing: CGFloat = 8
+    
+    public static let module: Bundle = .module
 }
