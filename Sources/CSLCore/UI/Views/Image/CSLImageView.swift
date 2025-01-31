@@ -27,6 +27,13 @@ public struct CSLImageView: View {
 
     public init(imageLink: URL?) { self.imageLink = imageLink }
     
+    public init?(imageLink: String?) {
+        guard let imageLink,
+              let url = URL(string: imageLink) else { return nil }
+        
+        self.init(imageLink: url)
+    }
+    
     // MARK: - Body
     
     /// The body of the image view.
