@@ -103,13 +103,15 @@ extension UIApplication {
     public static func presentSafariViewController(url: URL) {
         let safariViewController = SFSafariViewController(url: url)
         
-        UIApplication.shared.connectedScenes
+        let keyWindow = UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .filter { $0.activationState == .foregroundActive }
             .first?
-            .keyWindow?
-            .rootViewController?
-            .present(safariViewController, animated: true)
+            .keyWindow
+        
+        let presentedViewController = keyWindow?.rootViewController?.presentedViewController ?? keyWindow?.rootViewController
+        
+        presentedViewController?.present(safariViewController, animated: true)
     }
     
     /// Presents the modal screen for the specified `itunesItemIdentifier` using the `SKStoreProductViewController`.

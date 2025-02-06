@@ -10,8 +10,10 @@ public struct CSLEmptyListView: View {
     /// The list is scroll-disabled, ensuring no scrolling interaction.
     public var body: some View {
         List { EmptyView() }
-            .scrollDisabled(true) // Disables scrolling interaction in the list
-            .withOpacityAnimation() // Applies an opacity animation for a smooth transition
+            .scrollDisabled(true)
+            .scrollContentBackground(.hidden)
+            .contentMargins(.top, CSLConstants.verticalPadding)
+            .withOpacityAnimation()
     }
     
     // MARK: - Initialization
