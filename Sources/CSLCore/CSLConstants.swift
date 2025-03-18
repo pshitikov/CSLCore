@@ -19,6 +19,8 @@ public enum CSLConstants {
     /// A smaller corner radius, typically used for elements requiring less rounding.
     public static let smallCornerRadius: CGFloat = 8
     
+    public static let searchBarHeight: CGFloat = 36
+    
     /// The standard horizontal padding applied to UI elements.
     public static let horizontalPadding: CGFloat = 20
     

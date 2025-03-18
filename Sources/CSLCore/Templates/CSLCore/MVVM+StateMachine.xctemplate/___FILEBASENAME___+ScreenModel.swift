@@ -11,7 +11,7 @@ extension ___VARIABLE_NAME___Screen {
         
         init() { super.init(.initial) }
         
-        // MARK: - Override functions
+        // MARK: - Override Functions
         
         override func handleEvent(_ event: Event) -> ScreenState? {
             switch event {
@@ -19,6 +19,6 @@ extension ___VARIABLE_NAME___Screen {
             }
         }
         
-        // MARK: - Private functions
+        // MARK: - Private Functions
     }
 }

@@ -16,6 +16,7 @@ public struct CSLUpdateAppSheet: View {
         static let closeButtonTopPadding: CGFloat = 20
         static let maxImageWidth: CGFloat = 100
         static let maxImageHeight: CGFloat = 100
+        static let buttonsVeticalSpacing: CGFloat = 20
         
         static let screenTitle: LocalizedStringKey = "core_update_app_screen_title"
         static let description: LocalizedStringKey = "core_update_app_screen_description"
@@ -135,13 +136,17 @@ extension CSLUpdateAppSheet {
     @ViewBuilder
     private var bottomView: some View {
         VStack {
-            updateButtonView
-            
-            dismissButtonView
-            
+            buttonsView
             enableUpdatingView
         }
         .padding(.top, Values.closeButtonTopPadding)
+    }
+    
+    private var buttonsView: some View {
+        VStack(spacing: Values.buttonsVeticalSpacing) {
+            updateButtonView
+            dismissButtonView
+        }
     }
     
     /// The dismiss button that closes the screen.

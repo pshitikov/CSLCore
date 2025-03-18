@@ -12,9 +12,6 @@
       },
       "shouldTranslate" : false
     },
-    "123" : {
-
-    },
     "app_theme_dark_title" : {
       "localizations" : {
         "en" : {
@@ -100,13 +97,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can change the settings for push notifications in the Notifications section on your device"
+            "value" : "You can change the settings for push notifications in the Notifications section on your device."
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Изменить настройки пуш-уведомлений можно в разделе Уведомления на Вашем устройстве"
+            "state" : "needs_review",
+            "value" : "Изменить настройки пуш-уведомлений можно в разделе Уведомления на Вашем устройстве."
           }
         }
       }

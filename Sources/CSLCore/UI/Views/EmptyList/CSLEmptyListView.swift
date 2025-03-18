@@ -12,7 +12,7 @@ public struct CSLEmptyListView: View {
         List { EmptyView() }
             .scrollDisabled(true)
             .scrollContentBackground(.hidden)
-            .contentMargins(.top, CSLConstants.verticalPadding)
+            .contentMargins(.top, CSLConstants.listTopPadding)
             .withOpacityAnimation()
     }
     

@@ -95,4 +95,6 @@ extension View {
             self
         }
     }
+    
+    public func frame(side: CGFloat) -> some View { frame(width: side, height: side) }
 }

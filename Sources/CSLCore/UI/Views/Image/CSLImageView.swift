@@ -11,21 +11,18 @@ public struct CSLImageView: View {
     
     // MARK: - Enums
     
-    /// Enum to define constant values used internally.
-    private enum Values {
-        
-        /// The size of the image view (default size).
-        static let imageSize = CGSize(width: 50, height: 50)
-    }
-    
     // MARK: - Properties
     
     /// The URL of the image to be displayed.
     private let imageLink: URL?
+    private let placeholder: Image?
     
     // MARK: - Initialization
 
-    public init(imageLink: URL?) { self.imageLink = imageLink }
+    public init(imageLink: URL?, placeholder: Image? = nil) {
+        self.imageLink = imageLink
+        self.placeholder = placeholder
+    }
     
     public init?(imageLink: String?) {
         guard let imageLink,
@@ -43,7 +40,7 @@ public struct CSLImageView: View {
         WebImage(
             url: imageLink,
             content: { image in imageView(image) },
-            placeholder: { placeholderView }
+            placeholder: { placeholder }
         )
     }
 }
@@ -60,23 +57,6 @@ extension CSLImageView {
         image
             .resizable()
             .scaledToFill()
-    }
-    
-    /// A placeholder view that is shown while the image is loading.
-    ///
-    /// This view contains a default background and an icon, using `SFSymbol.photoFillOnRectangleFill` as a placeholder.
-    /// - Returns: A `ZStack` containing the background and icon.
-    private var placeholderView: some View {
-        ZStack {
-            Rectangle()
-                .fill(Color.tertiarySystemGroupedBackground)
-            
-            Image(systemName: SFSymbol.photoFillOnRectangleFill.rawValue)
-                .resizable()
-                .scaledToFill()
-                .frame(width: Values.imageSize.width, height: Values.imageSize.height)
-                .foregroundStyle(Color.tertiaryLabel)
-        }
     }
 }
 

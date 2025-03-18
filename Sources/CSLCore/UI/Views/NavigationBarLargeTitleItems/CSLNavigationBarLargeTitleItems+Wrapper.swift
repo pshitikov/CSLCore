@@ -83,7 +83,7 @@ extension CSLNavigationBarLargeTitleItems {
             }
         }
         
-        // MARK: - Private functions
+        // MARK: - Private Functions
         
         private func hideTralingItems() {
             guard let navigationBar = navigationController?.navigationBar,

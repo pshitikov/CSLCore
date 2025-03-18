@@ -12,6 +12,9 @@ public struct CSLNotificationSettingsSheet: View {
         /// Vertical spacing between elements in the screen.
         static let verticalSpacing: CGFloat = 12
         
+        /// Vertical spacing between elements in the screen.
+        static let verticalInfoSpacing: CGFloat = 20
+        
         /// Size of the close button.
         static let closeButtonSize: CGFloat = 30
         
@@ -58,26 +61,29 @@ public struct CSLNotificationSettingsSheet: View {
     
     /// The main body of the screen, consisting of several views stacked vertically.
     public var body: some View {
-        VStack(alignment: .leading, spacing: Values.verticalSpacing) {
-            headerView
-            imageView
-            descriptionView
-        }
-        .safeAreaInset(edge: .bottom, content: { actionButtonView })
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.vertical)
-        .padding(.horizontal, CSLConstants.horizontalPadding)
-        .modifier(PresentationHeightModifier(height: $screenHeight))
-        .interactiveDismissDisabled(false)
-        .presentationBackgroundInteraction(.disabled)
-        .presentationDragIndicator(.visible)
-        .presentationDetents([.height(screenHeight)])
+        contentView
+            .safeAreaInset(edge: .bottom, content: { actionButtonView })
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical)
+            .padding(.horizontal, CSLConstants.horizontalPadding)
+            .modifier(PresentationHeightModifier(height: $screenHeight))
+            .interactiveDismissDisabled(false)
+            .presentationBackgroundInteraction(.disabled)
+            .presentationDragIndicator(.visible)
+            .presentationDetents([.height(screenHeight)])
     }
 }
 
 // MARK: - Views
 
 extension CSLNotificationSettingsSheet {
+    
+    private var contentView: some View {
+        VStack(alignment: .leading, spacing: Values.verticalSpacing) {
+            headerView
+            notificationsInfoView
+        }
+    }
     
     /// The header section containing the screen title and a close button.
     private var headerView: some View {
@@ -101,6 +107,13 @@ extension CSLNotificationSettingsSheet {
         }
     }
     
+    private var notificationsInfoView: some View {
+        VStack(alignment: .leading, spacing: Values.verticalInfoSpacing) {
+            imageView
+            descriptionView
+        }
+    }
+    
     /// Displays the provided image with resizable properties and constraints.
     private var imageView: some View {
         image
@@ -116,7 +129,7 @@ extension CSLNotificationSettingsSheet {
         Text(Values.description, bundle: .module)
             .fixedSize(horizontal: false, vertical: true)
             .font(Font.body)
-            .foregroundStyle(Color.secondaryLabel)
+            .foregroundStyle(Color.label)
     }
     
     /// The action button that dismisses the screen and opens the notification settings.
