@@ -46,7 +46,7 @@ public struct CSLGalleryScreen: View {
     // MARK: - Views
     
     public var body: some View {
-        VStack(spacing: CSLConstants.verticalPadding) {
+        VStack(spacing: CSLConstants.gap16) {
             closeButtonView
             
             galleryView
@@ -75,13 +75,13 @@ extension CSLGalleryScreen {
                     .font(.system(size: Values.closeButtonImageSize))
             })
         }
-        .padding(.horizontal, CSLConstants.horizontalPadding)
+        .padding(.horizontal, CSLConstants.gap20)
     }
     
     /// The main gallery view that displays the images in a horizontally scrolling layout.
     private var galleryView: some View {
         ScrollView(.horizontal) {
-            LazyHStack(spacing: CSLConstants.horizontalPadding) {
+            LazyHStack(spacing: CSLConstants.gap20) {
                 ForEach(Array(zip(imageLinks.indices, imageLinks)), id: \.0) { index, item in
                     CSLImageView(imageLink: URL(string: item))
                         .scrollTransition(axis: .horizontal) { content, phase in
@@ -89,14 +89,14 @@ extension CSLGalleryScreen {
                                 .offset(x: phase.isIdentity ? 0 : phase.value * Values.scrollTransitionOffset)
                         }
                         .containerRelativeFrame(.horizontal)
-                        .clipShape(.rect(cornerRadius: CSLConstants.cornerRadius))
-                        .roundedCornerWithBorder(radius: CSLConstants.cornerRadius)
+                        .clipShape(.rect(cornerRadius: CSLConstants.corner16))
+                        .roundedCornerWithBorder(radius: CSLConstants.corner16)
                         .id(index)
                 }
             }
             .scrollTargetLayout()
         }
-        .contentMargins(.horizontal, CSLConstants.horizontalPadding, for: .scrollContent)
+        .contentMargins(.horizontal, CSLConstants.gap20, for: .scrollContent)
         .scrollTargetBehavior(.viewAligned)
         .scrollIndicators(.hidden)
         .scrollPosition(id: Binding($currentPage))

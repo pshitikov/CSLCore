@@ -75,7 +75,7 @@ public struct CSLPresentationInfoSheet: View {
         .safeAreaInset(edge: .bottom, content: { actionButton })
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical)
-        .padding(.horizontal, CSLConstants.horizontalPadding)
+        .padding(.horizontal, CSLConstants.gap20)
         .modifier(PresentationHeightModifier(height: $screenHeight))
         .interactiveDismissDisabled(false)
         .presentationBackgroundInteraction(.disabled)

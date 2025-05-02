@@ -1,15 +1,16 @@
 import SwiftUI
 
-/// A custom `ViewModifier` that executes an action when the view appears for the first time.
+/// A view modifier that performs an action only the first time the view appears.
 ///
-/// The ``OnFirstAppearModifier`` is used to trigger a closure only once,
-/// the first time a view appears in the view hierarchy.
-/// This is useful for performing one-time setup or side effects
-/// when a view becomes visible for the first time.
+/// Use `OnFirstAppearModifier` to run a closure **once**, when the view enters the view hierarchy for the first time.
+/// This is useful for triggering side effects such as:
+/// - Initial data loading
+/// - Analytics tracking
+/// - One-time animations or transitions
 ///
-/// - Note: The action will not be triggered again even if the view is re-rendered.
+/// The action will not be triggered again even if the view is re-rendered.
 ///
-/// Usage:
+/// You can apply this modifier directly:
 /// ```swift
 /// YourView()
 ///     .modifier(OnFirstAppearModifier {
@@ -17,40 +18,42 @@ import SwiftUI
 ///     })
 /// ```
 ///
-/// Alternatively, use the `onFirstAppear` convenience method on any `View`.
+/// Or use the `.onFirstAppear(_:)` convenience method:
+/// ```swift
+/// YourView()
+///     .onFirstAppear {
+///         // Your action here
+///     }
+/// ```
+///
+/// - SeeAlso: `View.onFirstAppear(_:)`
 public struct OnFirstAppearModifier: ViewModifier {
     
     // MARK: - Properties
     
-    /// Tracks whether the view has appeared before.
+    /// Tracks whether the view has already appeared.
     @State
     private var isAppeared = false
     
-    /// The closure to execute when the view appears for the first time.
+    /// The closure to perform on first appearance.
     private let onFirstAppearAction: () -> Void
     
     // MARK: - Initialization
     
-    /// Creates a new instance of `OnFirstAppearModifier`.
+    /// Creates a modifier that triggers an action once when the view appears.
     ///
-    /// - Parameter onFirstAppearAction: A closure to execute when the view appears for the first time.
+    /// - Parameter onFirstAppearAction: A closure to perform when the view appears for the first time.
     public init(_ onFirstAppearAction: @escaping () -> Void) {
         self.onFirstAppearAction = onFirstAppearAction
     }
     
     // MARK: - Body
     
-    /// The body of the modifier that applies the `onAppear` logic.
-    ///
-    /// - Parameter content: The content view to which the modifier is applied.
-    /// - Returns: A view that triggers the specified action on its first appearance.
     public func body(content: Content) -> some View {
         content
             .onAppear {
                 guard !isAppeared else { return }
-                
                 isAppeared = true
-                
                 onFirstAppearAction()
             }
     }
@@ -62,8 +65,12 @@ extension View {
     
     /// Adds an action to perform only when the view appears for the first time.
     ///
-    /// - Parameter onFirstAppearAction: A closure to execute when the view appears for the first time.
-    /// - Returns: A view with the `onFirstAppear` behavior applied.
+    /// This is a convenience method for applying `OnFirstAppearModifier`.
+    ///
+    /// - Parameter onFirstAppearAction: A closure to perform when the view appears for the first time.
+    /// - Returns: A view that triggers the action only once on its first appearance.
+    ///
+    /// - SeeAlso: `OnFirstAppearModifier`
     public func onFirstAppear(_ onFirstAppearAction: @escaping () -> Void) -> some View {
         modifier(OnFirstAppearModifier(onFirstAppearAction))
     }

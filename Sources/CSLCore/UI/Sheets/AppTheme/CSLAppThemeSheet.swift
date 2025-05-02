@@ -82,7 +82,7 @@ public struct CSLAppThemeSheet: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical)
-        .padding(.horizontal, CSLConstants.horizontalPadding)
+        .padding(.horizontal, CSLConstants.gap20)
         .modifier(PresentationHeightModifier(height: $screenHeight))
         .interactiveDismissDisabled(false)
         .presentationBackgroundInteraction(.disabled)
@@ -133,7 +133,7 @@ extension CSLAppThemeSheet {
     /// - Parameter theme: The theme to display.
     @ViewBuilder
     private func themeView(for theme: CSLAppTheme) -> some View {
-        VStack(spacing: CSLConstants.verticalPadding) {
+        VStack(spacing: CSLConstants.gap16) {
             Group {
                 switch theme {
                 case .light: lightImage.resizable()
@@ -143,7 +143,7 @@ extension CSLAppThemeSheet {
             }
             .aspectRatio(contentMode: .fill)
             .frame(width: Values.imageSize.width, height: Values.imageSize.height)
-            .roundedCornerWithBorder(radius: CSLConstants.cornerRadius)
+            .roundedCornerWithBorder(radius: CSLConstants.corner16)
             
             Text(theme.title, bundle: .module)
                 .font(.callout)

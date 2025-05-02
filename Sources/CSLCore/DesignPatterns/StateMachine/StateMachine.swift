@@ -48,7 +48,7 @@ open class StateMachine<State, Event>: NSObject, StateMachineProtocol where Stat
     /// - Parameters:
     ///   - oldState: The state before the transition.
     ///   - newState: The state after the transition.
-    open func handleStateUpdate(_ oldState: State, new newState: State) { /* Default implementation */ }
+    open func handleStateUpdate(_ oldState: State, new newState: State) { /* Default Implementation */ }
     
     /// Sends an event to the state machine, potentially triggering a state transition.
     ///
@@ -68,7 +68,7 @@ open class StateMachine<State, Event>: NSObject, StateMachineProtocol where Stat
     /// that should occur before transitioning out of the current state.
     ///
     /// - Parameter state: The state being exited.
-    open func leaveState(_ state: State) { /* Default implementation */ }
+    open func leaveState(_ state: State) { /* Default Implementation */ }
     
     /// Handles logic when entering a state.
     ///
@@ -76,5 +76,5 @@ open class StateMachine<State, Event>: NSObject, StateMachineProtocol where Stat
     /// that should occur after transitioning into the new state.
     ///
     /// - Parameter state: The state being entered.
-    open func enterState(_ state: State) { /* Default implementation */ }
+    open func enterState(_ state: State) { /* Default Implementation */ }
 }

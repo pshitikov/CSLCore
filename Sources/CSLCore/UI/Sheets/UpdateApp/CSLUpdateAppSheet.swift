@@ -72,7 +72,7 @@ public struct CSLUpdateAppSheet: View {
         .safeAreaInset(edge: .bottom, content: { bottomView })
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical)
-        .padding(.horizontal, CSLConstants.horizontalPadding)
+        .padding(.horizontal, CSLConstants.gap20)
         .modifier(PresentationHeightModifier(height: $screenHeight))
         .interactiveDismissDisabled(false)
         .presentationBackgroundInteraction(.disabled)
@@ -115,7 +115,7 @@ extension CSLUpdateAppSheet {
                 .resizable()
                 .scaledToFill()
                 .frame(maxWidth: Values.maxImageWidth, maxHeight: Values.maxImageHeight, alignment: .center)
-                .roundedCornerWithBorder(radius: CSLConstants.cornerRadius)
+                .roundedCornerWithBorder(radius: CSLConstants.corner16)
                 .allowsHitTesting(false)
             
             Spacer()
@@ -185,7 +185,7 @@ extension CSLUpdateAppSheet {
             .foregroundStyle(Color.secondaryLabel)
             .font(.caption)
             .multilineTextAlignment(.center)
-            .padding(.top, CSLConstants.verticalSpacing)
+            .padding(.top, CSLConstants.gap8)
     }
 }
 

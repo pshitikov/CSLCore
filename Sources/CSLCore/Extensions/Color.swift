@@ -160,3 +160,41 @@ extension Color {
     /// Corresponds to `UIColor.systemIndigo` and adapts to light and dark mode.
     public static let systemIndigo = Color(UIColor.systemIndigo)
 }
+
+// MARK: - Initialization
+
+extension Color {
+    
+    /// Creates a `Color` instance from a hexadecimal string.
+    ///
+    /// This initializer parses a hex string (e.g. `"#FF0000"` or `"00FF00"`) and returns a corresponding `Color`.
+    /// The input can optionally start with `#`, and must represent a **6-digit RGB** color.
+    ///
+    /// If the string is `nil`, malformed, or cannot be parsed as a valid 6-digit hex code, the initializer returns `nil`.
+    ///
+    /// Example usage:
+    /// ```swift
+    /// let red = Color(hex: "#FF0000")
+    /// let green = Color(hex: "00FF00")
+    /// let invalid = Color(hex: "GGG") // nil
+    /// ```
+    ///
+    /// - Parameter hex: A hexadecimal RGB string (with or without `#`).
+    /// - Returns: A `Color` instance if the hex string is valid, or `nil` otherwise.
+    public init?(hex: String?) {
+        guard let hex else { return nil }
+        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
+        
+        var rgb: UInt64 = 0
+        let scanner = Scanner(string: hexSanitized)
+        
+        guard scanner.scanHexInt64(&rgb) else { return nil }
+        
+        let red = Double((rgb & 0xFF0000) >> 16) / 255
+        let green = Double((rgb & 0x00FF00) >> 8) / 255
+        let blue = Double(rgb & 0x0000FF) / 255
+        
+        self.init(red: red, green: green, blue: blue)
+    }
+}

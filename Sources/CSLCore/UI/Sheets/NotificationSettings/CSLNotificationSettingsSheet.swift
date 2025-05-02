@@ -65,7 +65,7 @@ public struct CSLNotificationSettingsSheet: View {
             .safeAreaInset(edge: .bottom, content: { actionButtonView })
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical)
-            .padding(.horizontal, CSLConstants.horizontalPadding)
+            .padding(.horizontal, CSLConstants.gap20)
             .modifier(PresentationHeightModifier(height: $screenHeight))
             .interactiveDismissDisabled(false)
             .presentationBackgroundInteraction(.disabled)
@@ -120,7 +120,7 @@ extension CSLNotificationSettingsSheet {
             .resizable()
             .scaledToFill()
             .frame(maxWidth: Values.maxImageWidth, maxHeight: Values.maxImageHeight, alignment: .top)
-            .roundedCornerWithBorder(radius: CSLConstants.cornerRadius)
+            .roundedCornerWithBorder(radius: CSLConstants.corner16)
             .allowsHitTesting(false)
     }
     

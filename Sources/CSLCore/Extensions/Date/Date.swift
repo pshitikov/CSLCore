@@ -132,6 +132,9 @@ extension Date {
         }
     }
     
+    /// A Boolean value indicating whether the date is earlier than the current date and time.
+    var isPast: Bool { self < Date() }
+    
     /// A boolean indicating whether the current date is today.
     public var isToday: Bool { Calendar.gregorian.isDateInToday(self) }
     
